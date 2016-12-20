@@ -4,8 +4,6 @@ namespace laba2.Model
 {
     public class Account : BaseEntity
     {
-        public string PersonName { get; set; }
-
         public decimal TotalCash { get; set; }
 
         public decimal MonthlyIncome { get; set; }

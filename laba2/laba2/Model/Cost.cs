@@ -4,8 +4,6 @@ namespace laba2.Model
 {
     public class Cost : BaseEntity
     {
-        public string CostTitle { get; set; }
-
         public string Description { get; set; }
 
         public decimal Cash { get; set; }

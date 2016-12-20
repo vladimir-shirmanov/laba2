@@ -27,8 +27,6 @@ namespace laba2.ViewModel
             FillCollection();
         }
 
-
-
         private void FillCollection()
         {
             this.Accounts = new ObservableCollection<Account>();
