@@ -4,9 +4,42 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:laba2"
+        xmlns:views="clr-namespace:laba2.View"
+        xmlns:viewModel="clr-namespace:laba2.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="350" Width="525"
+        Background="{DynamicResource WindowBackgroundBrush}">
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:StartPageViewModel}">
+            <views:StartPageView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:AccountsPageViewModel}">
+            <views:AccountsPageView />
+        </DataTemplate>
+
+        <LinearGradientBrush x:Key="WindowBackgroundBrush">
+            <GradientStop Offset="0" Color="Silver" />
+            <GradientStop Offset="1" Color="Gray" />
+        </LinearGradientBrush>
+    </Window.Resources>
+
+    <DockPanel>
+        <Border BorderThickness="0, 0, 1, 0" BorderBrush="Black">
+            <StackPanel DockPanel.Dock="Left"
+                    Width="100" Background="AliceBlue">
+                <TextBlock TextAlignment="Center" FontSize="15" Margin="0, 0, 0, 10" FontWeight="Bold">* Menu *</TextBlock>
+                <Button Content="Start page" Command="{Binding NavCommand}" CommandParameter="startPage"/>
+                <Button Content="Account" Command="{Binding NavCommand}" CommandParameter="accounts"/>
+                <Button Content="Start page"/>
+            </StackPanel>
+        </Border>
+        <Grid Margin="3, 0, 0 ,0">
+            <ContentControl Content="{Binding CurrentViewModel}"/>
+        </Grid>
+    </DockPanel>
 </Window>
