@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="laba2.View.AddAccountPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:laba2.View"
+             xmlns:viewModel="clr-namespace:laba2.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             Background="LightCoral">
+    <UserControl.DataContext>
+        <viewModel:AddAccountPageViewModel />
+    </UserControl.DataContext>
+
+    <GroupBox Header="Account details" Padding="5" Margin="5">
+        <StackPanel>
+            <GroupBox Header="Name">
+                <TextBox Text="{Binding Account.Name}" />
+            </GroupBox>
+            <GroupBox Header="Total cash">
+                <DockPanel VerticalAlignment="Center" Margin="10">
+                    <TextBox Text="{Binding ElementName=slValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Maximum="10000" TickPlacement="BottomRight" TickFrequency="500" IsSnapToTickEnabled="True" Name="slValue" Value="{Binding Account.TotalCash}"/>
+                </DockPanel>
+            </GroupBox>
+            <GroupBox Header="Monthely income">
+                <DockPanel VerticalAlignment="Center" Margin="10">
+                    <TextBox Text="{Binding ElementName=slMonthlyIncome, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Maximum="10000" TickPlacement="BottomRight" TickFrequency="500" IsSnapToTickEnabled="True" Name="slMonthlyIncome" Value="{Binding Account.MonthlyIncome}"/>
+                </DockPanel>
+            </GroupBox>
+            <Button Command="{Binding Save}" Content="Save account" Margin="10" />
+        </StackPanel>
+    </GroupBox>
+</UserControl>

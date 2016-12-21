@@ -1,5 +1,4 @@
-﻿using laba2.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +16,11 @@ using System.Windows.Shapes;
 namespace laba2.View
 {
     /// <summary>
-    /// Interaction logic for AccountsPageView.xaml
+    /// Interaction logic for DetailsPageView.xaml
     /// </summary>
-    public partial class AccountsPageView : UserControl
+    public partial class DetailsPageView : UserControl
     {
-        public AccountsPageView()
+        public DetailsPageView()
         {
             InitializeComponent();
         }

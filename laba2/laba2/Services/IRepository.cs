@@ -8,6 +8,7 @@ namespace laba2.Services
         IQueryable<T> GetAll();
         T GetById(int id);
         int Add(T entity);
+        void AddOrUpdate(T entity);
         int Update(T entity);
         bool Delete(T entity);
         bool Delete(int id);

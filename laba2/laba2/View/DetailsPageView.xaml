@@ -1,0 +1,111 @@
+﻿<UserControl x:Class="laba2.View.DetailsPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:laba2"
+             xmlns:viewModel="clr-namespace:laba2.ViewModel"
+             xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             x:Name="Parent"
+             Background="Bisque">
+    <UserControl.Resources>
+        <Style TargetType="Label">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="11" />
+        </Style>
+
+        <Style BasedOn="{StaticResource {x:Type Label}}"
+               TargetType="Label"
+               x:Key="tableHeader">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontFamily" Value="Comic Sans MS" />
+        </Style>
+        <local:BoolInverter x:Key="boolInverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="8*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="2" BorderThickness="1" BorderBrush="Black">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Label Style="{StaticResource tableHeader}" Grid.Row="0" Grid.Column="0">Account name</Label>
+                <Label Style="{StaticResource tableHeader}" Grid.Row="0" Grid.Column="1">Balance</Label>
+                <Label Style="{StaticResource tableHeader}" Grid.Row="0" Grid.Column="2">Monthly income</Label>
+
+                <Label Grid.Row="1" Grid.Column="0" Content="{Binding Account.Name}"/>
+                <Label Grid.Row="1" Grid.Column="1" Content="{Binding Account.TotalCash}" />
+                <Label Grid.Row="1" Grid.Column="2" Content="{Binding Account.MonthlyIncome}" />
+
+            </Grid>
+        </Border>
+        
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <CheckBox x:Name="allPeriod" VerticalAlignment="Center" IsChecked="{Binding FullPeriod}" />
+            <Label Content="Start: " />
+            <DatePicker SelectedDate="{Binding StartDate}" IsEnabled="{Binding ElementName=allPeriod, Path=IsChecked, Converter={StaticResource boolInverter}}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+            <Label Content="End: " />
+            <DatePicker SelectedDate="{Binding EndDate}" IsEnabled="{Binding ElementName=allPeriod, Path=IsChecked, Converter={StaticResource boolInverter}}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Vertical">
+            <DataGrid ItemsSource="{Binding Account.Incomes}"
+                      AutoGenerateColumns="False"
+                      x:Name="incomes"
+                      diag:PresentationTraceSources.TraceLevel="High">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Title" />
+                    <DataGridTextColumn Binding="{Binding Cash}" Header="Cash" />
+                    <DataGridTextColumn Binding="{Binding Description}" Header="Descritption" />
+                    <DataGridTextColumn Binding="{Binding Date}" Header="Date" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Grid.Row="1">
+                <Button Content="Update income selected row"
+                        Command="{Binding UpdateIncomes}"
+                        CommandParameter="{Binding ElementName=incomes, Path=SelectedItems}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical">
+            <DataGrid ItemsSource="{Binding Account.Costs}"
+                      AutoGenerateColumns="False"
+                      x:Name="costs"
+                      diag:PresentationTraceSources.TraceLevel="High">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Title" />
+                    <DataGridTextColumn Binding="{Binding Cash}" Header="Cash" />
+                    <DataGridTextColumn Binding="{Binding Description}" Header="Descritption" />
+                    <DataGridTextColumn Binding="{Binding Date}" Header="Date" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Grid.Row="1">
+                <Button Content="Update costs selected row"
+                        Command="{Binding UpdateCosts}"
+                        CommandParameter="{Binding ElementName=costs, Path=Selected}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -3,16 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:laba2.View"
              xmlns:viewModel="clr-namespace:laba2.ViewModel"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+             xmlns:local="clr-namespace:laba2"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+
     <UserControl.DataContext>
         <viewModel:AccountsPageViewModel />
     </UserControl.DataContext>
-    
-    <ListView ItemsSource="">
-        
-    </ListView>
-    
+
+    <StackPanel Orientation="Vertical">
+        <ListView ItemsSource="{Binding Accounts}"
+                  Background="Transparent"
+                  diag:PresentationTraceSources.TraceLevel="High">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="100" Text="{Binding Name}" FontWeight="Bold" Margin="0, 0, 20, 0"/>
+                        <TextBlock Margin="0, 0, 10, 0"><Hyperlink Command="{Binding Path=DataContext.Details, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Id}">Details</Hyperlink></TextBlock>
+                        <TextBlock Margin="0, 0, 10, 0"><Hyperlink Command="{Binding Path=DataContext.Delete, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Id}">Delete</Hyperlink></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Content="Add new account" Command="{Binding Navigate}" />
+    </StackPanel>
+
 </UserControl>

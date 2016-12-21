@@ -86,7 +86,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BoolInverter.cs" />
     <Compile Include="DB\BankContext.cs" />
+    <Compile Include="DTO\AccountDTO.cs" />
+    <Compile Include="DTO\CostDTO.cs" />
+    <Compile Include="DTO\IncomeDTO.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Migrations\201612201658455_InitialMigration.cs" />
     <Compile Include="Migrations\201612201658455_InitialMigration.Designer.cs">
@@ -104,11 +108,19 @@
     <Compile Include="Services\IRepository.cs" />
     <Compile Include="Services\Repository.cs" />
     <Compile Include="ViewModel\AccountsPageViewModel.cs" />
+    <Compile Include="ViewModel\AddAccountPageViewModel.cs" />
     <Compile Include="ViewModel\BaseClasses\MainViewModel.cs" />
     <Compile Include="ViewModel\BaseClasses\ViewModelLocator.cs" />
+    <Compile Include="ViewModel\DetailsPageViewModel.cs" />
     <Compile Include="ViewModel\StartPageViewModel.cs" />
     <Compile Include="View\AccountsPageView.xaml.cs">
       <DependentUpon>AccountsPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddAccountPageView.xaml.cs">
+      <DependentUpon>AddAccountPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DetailsPageView.xaml.cs">
+      <DependentUpon>DetailsPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\StartPageView.xaml.cs">
       <DependentUpon>StartPageView.xaml</DependentUpon>
@@ -133,6 +145,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\AccountsPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddAccountPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DetailsPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -165,7 +185,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="connectionStrings.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

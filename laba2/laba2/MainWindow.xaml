@@ -22,6 +22,14 @@
             <views:AccountsPageView />
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModel:AddAccountPageViewModel}">
+            <views:AddAccountPageView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:DetailsPageViewModel}">
+            <views:DetailsPageView />
+        </DataTemplate>
+
         <LinearGradientBrush x:Key="WindowBackgroundBrush">
             <GradientStop Offset="0" Color="Silver" />
             <GradientStop Offset="1" Color="Gray" />
@@ -35,7 +43,6 @@
                 <TextBlock TextAlignment="Center" FontSize="15" Margin="0, 0, 0, 10" FontWeight="Bold">* Menu *</TextBlock>
                 <Button Content="Start page" Command="{Binding NavCommand}" CommandParameter="startPage"/>
                 <Button Content="Account" Command="{Binding NavCommand}" CommandParameter="accounts"/>
-                <Button Content="Start page"/>
             </StackPanel>
         </Border>
         <Grid Margin="3, 0, 0 ,0">

@@ -68,5 +68,17 @@ namespace laba2.Services
         {
             _context.Dispose();
         }
+
+        public void AddOrUpdate(T entity)
+        {
+            if(!_dbSet.Any(x => x.Id == entity.Id))
+            {
+                this.Add(entity);
+            }
+            else
+            {
+                this.Update(entity);
+            }
+        }
     }
 }
